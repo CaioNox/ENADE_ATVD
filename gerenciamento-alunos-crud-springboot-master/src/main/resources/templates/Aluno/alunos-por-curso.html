@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <title>Alunos por Curso</title>
+    <meta name="author" content="Julius Cavalcante">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/006642858d.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+</head>
+<body>
+
+        <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+
+        <div class="container">
+        <h3>Alunos Matriculados por Curso</h3>
+        <hr>
+
+        <form method="get" action="/alunos-por-curso" class="row g-2 align-items-end" style="margin-bottom: 20px;">
+            <div class="col-md-4">
+                <label>Filtrar por Curso:</label>
+                <select class="form-control" name="curso">
+                    <option value="">Todos os cursos</option>
+                    <option th:each="curso : ${T(br.com.gerenciamento.enums.Curso).values()}"
+                            th:value="${curso}"
+                            th:text="${curso.curso}"
+                            th:selected="${curso == cursoSelecionado}"></option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-outline-primary"><i class="bi bi-search"></i> Filtrar</button>
+            </div>
+        </form>
+
+        <h5 th:if="${cursoSelecionado != null}" th:text="'Curso: ' + ${cursoSelecionado.curso}"></h5>
+
+        <table class="table table-bordered table-hover">
+        <thead>
+            <th scope="col">Matricula</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Curso</th>
+        </thead>
+        <tbody>
+            <tr scope="row" th:each="aluno : ${alunosList}">
+                <td th:text="${aluno.matricula}"></td>
+                <td th:text="${aluno.nome}"></td>
+                <td th:text="${aluno.curso.curso}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(alunosList)}">
+                <td colspan="3">Nenhum aluno matriculado neste curso.</td>
+            </tr>
+        </tbody>
+        </table>
+        </div>
+
+        <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

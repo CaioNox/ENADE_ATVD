@@ -1,0 +1,41 @@
+# Compilados / build
+target/
+build/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+
+# Logs
+*.log
+logs/
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# IDE - Eclipse / STS
+.settings/
+.project
+.classpath
+.springBeans
+.sts4-cache/
+bin/
+
+# IDE - VS Code
+.vscode/
+
+# IDE - NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente locais
+*.env
+application-local.properties
